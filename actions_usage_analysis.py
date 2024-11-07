@@ -1,6 +1,7 @@
 #!python3
 import polars as pl
 import streamlit as st
+from datetime import datetime, timedelta
 
 
 def main():
@@ -102,9 +103,9 @@ def main():
         .with_columns(pl.col("Total Cost Per User ($)").round(2))
     )
 
-    start_date = df["Date"].min()
-    end_date = df["Date"].max()
-    time_period = (end_date - start_date).days
+    start_date: datetime = df["Date"].min()
+    end_date: datetime = df["Date"].max()
+    time_period: timedelta = (end_date - start_date).days
     st.write(
         f"This report covers **{time_period} days** between **{start_date}** and **{end_date}**"
     )
