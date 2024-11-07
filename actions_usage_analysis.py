@@ -102,6 +102,13 @@ def main():
         .with_columns(pl.col("Total Cost Per User ($)").round(2))
     )
 
+    start_date = df["Date"].min()
+    end_date = df["Date"].max()
+    time_period = (end_date - start_date).days
+    st.write(
+        f"This report covers **{time_period} days** between **{start_date}** and **{end_date}**"
+    )
+
     st.write("### Top 10 most expensive repositories by total cost")
     st.write(top_10_most_expensive_repositories_by_total_cost)
     st.write("### Top 10 most expensive repository products by total cost")
